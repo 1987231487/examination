@@ -18,7 +18,7 @@ func SentEmail(addr  string)(code string,err error){
 	m.SetBody("text/html", "您的验证码为:"+code) //邮件内容
 	//m.Attach("E:\\IMGP0814.JPG")       //邮件附件
 
-	d := gomail.NewDialer("smtp.qq.com", 465, "1987231487@qq.com", "buqmfoagfsopcacc")
+	d := gomail.NewDialer("smtp.qq.com", 465, "1987231487@qq.com", "xxxxxxxxxxx")
 	//邮件发送服务器信息,使用授权码而非密码
 	if err := d.DialAndSend(m); err != nil {
 		return "",err
