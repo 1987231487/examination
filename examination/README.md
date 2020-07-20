@@ -40,6 +40,7 @@
 - Request querystring
 
   ```
+  email:lsh1987231487@126.com //注册的邮箱
   name:123456     //用户名
   password:123456  //密码
   code:844999   //上面的验证码 
