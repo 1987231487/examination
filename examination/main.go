@@ -7,6 +7,6 @@ import (
 func main(){
 
 	r:=routers.InitRouter()
-	r.Run(":8080")
+	r.Run(":10086")
 
 }

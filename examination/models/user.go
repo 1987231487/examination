@@ -10,9 +10,9 @@ type User struct{
 	Level int `json:"level"`
 }
 
-func init(){
-	db.Table("user").CreateTable(&User{})
-}
+//func init(){
+//	db.Table("user").CreateTable(&User{})
+//}
 func CheckUser(username, password string) bool {
 	var user User
 	db.Table("user").Select("id").Where(User{Username : username, Password : password}).First(&user)

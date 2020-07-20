@@ -4,6 +4,7 @@ import (
 	"examination/models"
 	"examination/pkg/e"
 	"examination/pkg/util"
+	"examination/redis"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
@@ -64,10 +65,8 @@ func Getcode(c *gin.Context) {
 	mycode,err:=util.SentEmail(email)
 
 	if err==nil{
-	a=cache{
-		Email: email,
-		Code: mycode,
-	}
+	redis.Set(email,mycode)
+
 	c.JSON(200,gin.H{"msg":"验证码已发送"})
 }else{
 		c.JSON(400,gin.H{"msg":"验证码发送失败"})
@@ -77,12 +76,22 @@ func Getcode(c *gin.Context) {
 func Register(c *gin.Context) {
 	data := make(map[string]interface{})
 	code := e.INVALID_PARAMS
-	mycode:=a.Code
-	email:=a.Email
+	//mycode:=a.Code
+	//email:=a.Email
+	email:=c.Query("email")
 	usercode:=c.Query("code")
 	name := c.Query("name")
 	password := c.Query("password")
 	level:=com.StrTo(c.Query("level")).MustInt()
+	mycode,err:=redis.Get(email)
+	if err!=nil{
+		c.JSON(http.StatusOK, gin.H{
+			"code" : 301,
+			"msg" : "邮箱未注册验证码",
+			"data" : data,
+		})
+		return
+	}
 	if ok:=strings.EqualFold(mycode,usercode);!ok{
 		code=10002
 		c.JSON(http.StatusOK, gin.H{

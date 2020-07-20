@@ -35,7 +35,7 @@ func init() {  //调用包默认执行此函数
 }
 
 func LoadBase() {    //载入RunMode
-	RunMode = Cfg.Section("").Key("RUN_MODE").MustString("debug")
+	RunMode = Cfg.Section("").Key("RUN_MODE").MustString("release")
 }
 
 func LoadServer() {

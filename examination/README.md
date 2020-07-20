@@ -43,7 +43,7 @@
   name:123456     //用户名
   password:123456  //密码
   code:844999   //上面的验证码 
-  level:0  //权限等级
+  level:0  //权限等级 1或0
   ```
 
 - Response Body
